@@ -46,21 +46,29 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                spacing: 16,
-                children: [
-                  for (var val in conversionMapToPln.entries)
-                    Row(
-                      spacing: 8,
-                      children: [
-                        val.key.getFlag(),
-                        Text(
-                          "${(currency.toDouble() / val.value).toStringAsFixed(2)} ${val.key.currency}",
-                        ),
-                      ],
-                    ),
-                ],
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  border: Border(
+                    left: BorderSide(color: Colors.black, width: 2),
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  spacing: 16,
+                  children: [
+                    for (var val in conversionMapToPln.entries)
+                      Row(
+                        spacing: 8,
+                        children: [
+                          val.key.getFlag(),
+                          Text(
+                            "${(currency.toDouble() / val.value).toStringAsFixed(2)} ${val.key.currency}",
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
               ),
             ),
           ],
