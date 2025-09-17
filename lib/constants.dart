@@ -1,4 +1,5 @@
 import "package:country_flags/country_flags.dart";
+import "package:flutter/widgets.dart";
 
 enum Country {
   unitedStates(name: "United States", code: "US", currency: "USD"),
@@ -18,7 +19,10 @@ enum Country {
 
   String get countryCurrency => currency;
 
-  getFlag() => CountryFlag.fromCountryCode(code);
+  Widget getFlag() => CountryFlag.fromCountryCode(
+    code,
+    theme: const ImageTheme(shape: Circle()),
+  );
 }
 
 const conversionMapToPln = <Country, double>{
