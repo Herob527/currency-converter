@@ -12,20 +12,21 @@ class MyHomePage extends StatelessWidget {
     final cubit = context.read<CurrencyCubit>();
     return Scaffold(
       body: BlocBuilder<CurrencyCubit, Currency>(
-        builder: (context, currency) => Column(
+        builder: (context, currency) => Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [Text(currency.toString())],
             ),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 16,
-
               children: [
                 for (var val in conversionMapToPln.entries)
-                  Column(
+                  Row(
+                    spacing: 8,
                     children: [
                       val.key.getFlag(),
                       Text(
