@@ -17,9 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: MaterialApp(
-        home: BlocProvider(create: (_) => CurrencyCubit(), child: MyHomePage()),
-      ),
+      home: BlocProvider(create: (_) => CurrencyCubit(), child: MyHomePage()),
     );
   }
 }
