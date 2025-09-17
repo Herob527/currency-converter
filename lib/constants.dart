@@ -2,6 +2,7 @@ import "package:country_flags/country_flags.dart";
 import "package:flutter/widgets.dart";
 
 enum Country {
+  poland(name: "Poland", code: "PL", currency: "PLN"),
   unitedStates(name: "United States", code: "US", currency: "USD"),
   europeanUnion(name: "Germany", code: "DEU", currency: "EUR"),
   unitedKingdom(name: "United Kingdom", code: "GB", currency: "GBP"),
@@ -29,5 +30,5 @@ const conversionMapToPln = <Country, double>{
   Country.unitedStates: 3.64,
   Country.europeanUnion: 4.25,
   Country.unitedKingdom: 3.56,
-  Country.india: 3.25,
+  Country.india: 0.04,
 };
