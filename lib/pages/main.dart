@@ -9,10 +9,20 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<CurrencyCubit, Currency>(
-        builder: (context, test) => Center(child: Text(test.small.toString())),
+        builder: (context, currency) => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[Text(currency.toString())],
+            ),
+          ],
+        ),
       ),
       appBar: AppBar(title: Text("Currency")),
       floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        spacing: 16,
         children: <Widget>[
           FloatingActionButton.small(
             child: const Icon(Icons.plus_one),
