@@ -16,6 +16,8 @@ class Currency {
         code: newCode ?? code,
       );
 
+  double toDouble() => big + small / 100;
+
   @override
   String toString() {
     return "$big,${small.toString().padLeft(2, '0')} $code";
