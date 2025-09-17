@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_currency/constants.dart';
 import 'package:flutter_currency/models/currency.dart';
+import 'package:flutter_currency/repositories/currency_repository.dart';
 import 'package:flutter_currency/viewmodels/currency_view_model.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -10,6 +11,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<CurrencyCubit>();
+    currencyRepository.getCurrencies();
     return Scaffold(
       body: BlocBuilder<CurrencyCubit, Currency>(
         builder: (context, currency) => Row(

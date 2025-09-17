@@ -1,11 +1,15 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_currency/pages/main.dart';
 import 'package:flutter_currency/viewmodels/currency_view_model.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+final dio = Dio();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
