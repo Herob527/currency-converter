@@ -22,6 +22,26 @@ class MyHomePage extends StatelessWidget {
                     currency.toString(),
                     style: const TextStyle(fontSize: 32),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 8,
+                    children: [
+                      MaterialButton(
+                        color: Colors.red,
+                        child: const Icon(Icons.exposure_minus_1),
+                        onPressed: () {
+                          cubit.decrement();
+                        },
+                      ),
+                      MaterialButton(
+                        color: Colors.blue,
+                        child: const Icon(Icons.plus_one),
+                        onPressed: () {
+                          cubit.increment();
+                        },
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -47,25 +67,6 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       appBar: AppBar(title: Text("Currency")),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        spacing: 16,
-        children: <Widget>[
-          FloatingActionButton.small(
-            child: const Icon(Icons.plus_one),
-            onPressed: () {
-              cubit.increment();
-            },
-          ),
-
-          FloatingActionButton.small(
-            child: const Icon(Icons.exposure_minus_1),
-            onPressed: () {
-              cubit.decrement();
-            },
-          ),
-        ],
-      ),
     );
   }
 }
