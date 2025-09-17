@@ -13,6 +13,11 @@ class Currency {
         big: newBig ?? big,
         code: newCode ?? code,
       );
+
+  @override
+  String toString() {
+    return "$big,${small.toString().padLeft(2, '0')} $code";
+  }
 }
 
 class CurrencyCubit extends Cubit<Currency> {
