@@ -1,3 +1,4 @@
+import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_currency/constants.dart';
@@ -21,12 +22,14 @@ class MyHomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 16,
+
               children: [
                 for (var val in conversionMapToPln.entries)
                   Column(
                     children: [
+                      val.key.getFlag(),
                       Text(
-                        "${(currency.toDouble() / val.value).toStringAsFixed(2)} ${val.key}",
+                        "${(currency.toDouble() / val.value).toStringAsFixed(2)} ${val.key.currency}",
                       ),
                     ],
                   ),
