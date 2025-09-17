@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_currency/constants.dart';
 import 'package:flutter_currency/models/currency.dart';
+import 'package:flutter_currency/viewmodels/currency_view_model.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});

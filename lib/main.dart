@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_currency/models/currency.dart';
 import 'package:flutter_currency/pages/main.dart';
+import 'package:flutter_currency/viewmodels/currency_view_model.dart';
 
 void main() {
   runApp(const MyApp());
