@@ -16,6 +16,7 @@ class MyHomePage extends StatelessWidget {
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 16,
                 children: [
                   Country.poland.getFlag(),
                   Text(
