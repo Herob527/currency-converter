@@ -11,7 +11,9 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<CurrencyCubit>();
-    currencyRepository.getCurrencies();
+    currencyRepository.getCurrencies().then((value) {
+      print(value?.table);
+    });
     return Scaffold(
       body: BlocBuilder<CurrencyCubit, Currency>(
         builder: (context, currency) => Row(
