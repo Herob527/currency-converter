@@ -10,5 +10,13 @@ class CurrencyResponseModel {
   String? effectiveDate;
   List<CurrencyRate> rates = [];
 
-  CurrencyResponseModel({this.table, this.no, this.effectiveDate, this.rates = const []});
+  CurrencyResponseModel({
+    this.table,
+    this.no,
+    this.effectiveDate,
+    this.rates = const [],
+  });
+
+  factory CurrencyResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$CurrencyResponseModelFromJson(json);
 }
