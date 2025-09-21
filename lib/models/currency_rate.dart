@@ -9,4 +9,7 @@ class CurrencyRate {
   final String code;
 
   CurrencyRate({required this.currency, required this.mid, required this.code});
+
+  factory CurrencyRate.fromJson(Map<String, dynamic> json) =>
+      _$CurrencyRateFromJson(json);
 }
