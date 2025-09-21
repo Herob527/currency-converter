@@ -17,6 +17,13 @@ class CurrencyResponseModel {
     this.rates = const [],
   });
 
-  factory CurrencyResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$CurrencyResponseModelFromJson(json);
+  factory CurrencyResponseModel.fromJson(dynamic json) {
+    if (json is Map<String, dynamic>) {
+      return _$CurrencyResponseModelFromJson(json);
+    }
+    if (json is List<dynamic>) {
+      return _$CurrencyResponseModelFromJson(json[0]);
+    }
+    throw Exception("Unsupported type: ${json.runtimeType}");
+  }
 }
