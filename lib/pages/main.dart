@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_currency/constants.dart';
+import 'package:flutter_currency/cubits/future_cubit.dart';
 import 'package:flutter_currency/models/currency.dart';
+import 'package:flutter_currency/models/currency_response.dart';
 import 'package:flutter_currency/repositories/currency_repository.dart';
-import 'package:flutter_currency/viewmodels/currency_view_model.dart';
+import 'package:flutter_currency/cubits/currency_cubit.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<CurrencyCubit>();
-    currencyRepository.getCurrencies().then((value) {
-      print(value?.table);
-    });
+    final currencyCubit = context.read<CurrencyCubit>();
+    final futureCubit = context.read<FutureCubit<CurrencyResponseModel?>>();
+    futureCubit.fetch(() => currencyRepository.getCurrencies());
     return Scaffold(
       body: BlocBuilder<CurrencyCubit, Currency>(
         builder: (context, currency) => Row(
@@ -36,14 +37,14 @@ class MyHomePage extends StatelessWidget {
                         color: Colors.red,
                         child: const Icon(Icons.exposure_minus_1),
                         onPressed: () {
-                          cubit.decrement();
+                          currencyCubit.decrement();
                         },
                       ),
                       MaterialButton(
                         color: Colors.blue,
                         child: const Icon(Icons.plus_one),
                         onPressed: () {
-                          cubit.increment();
+                          currencyCubit.increment();
                         },
                       ),
                     ],

@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_currency/cubits/future_cubit.dart';
+import 'package:flutter_currency/models/currency_response.dart';
 
 import 'package:flutter_currency/pages/main.dart';
-import 'package:flutter_currency/viewmodels/currency_view_model.dart';
+import 'package:flutter_currency/cubits/currency_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +23,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: BlocProvider(create: (_) => CurrencyCubit(), child: MyHomePage()),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (BuildContext context) => CurrencyCubit()),
+          BlocProvider(
+            create: (BuildContext context) =>
+                FutureCubit<CurrencyResponseModel?>(),
+          ),
+        ],
+        child: MyHomePage(),
+      ),
     );
   }
 }
