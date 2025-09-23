@@ -15,6 +15,7 @@ class MyHomePage extends StatelessWidget {
     final currencyCubit = context.read<CurrencyCubit>();
     final futureCubit = context.read<FutureCubit<CurrencyResponseModel?>>();
     futureCubit.fetch(() => currencyRepository.getCurrencies());
+    print(futureCubit.state.status);
     return Scaffold(
       body: BlocBuilder<CurrencyCubit, Currency>(
         builder: (context, currency) => Row(
@@ -24,6 +25,10 @@ class MyHomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 16,
                 children: [
+                  Text(
+                    (futureCubit.state.status == FutureStatus.loading)
+                        .toString(),
+                  ),
                   Country.poland.getFlag(),
                   Text(
                     currency.toString(),
