@@ -15,7 +15,6 @@ class MyHomePage extends StatelessWidget {
     final currencyCubit = context.read<CurrencyCubit>();
     final futureCubit = context.read<FutureCubit<CurrencyResponseModel?>>();
     futureCubit.fetch(() => currencyRepository.getCurrencies());
-    print(futureCubit.state.status);
     return Scaffold(
       body: BlocBuilder<CurrencyCubit, Currency>(
         builder: (context, currency) => Row(
@@ -25,10 +24,6 @@ class MyHomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 16,
                 children: [
-                  Text(
-                    (futureCubit.state.status == FutureStatus.loading)
-                        .toString(),
-                  ),
                   Country.poland.getFlag(),
                   Text(
                     currency.toString(),
@@ -57,32 +52,36 @@ class MyHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  border: Border(
-                    left: BorderSide(color: Colors.black, width: 2),
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  spacing: 16,
-                  children: [
-                    for (var val in conversionMapToPln.entries)
-                      Row(
-                        spacing: 8,
-                        children: [
-                          val.key.getFlag(),
-                          Text(
-                            "${(currency.toDouble() / val.value).toStringAsFixed(2)} ${val.key.currency}",
+            futureCubit.state.data != null
+                ? Expanded(
+                    child: SingleChildScrollView(
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            left: BorderSide(color: Colors.black, width: 2),
                           ),
-                        ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          spacing: 16,
+                          children: [
+                            for (var val in futureCubit.state.data!.rates)
+                              Row(
+                                spacing: 8,
+                                children: [
+                                  Text(val.code),
+                                  Text(
+                                    "${(currency.toDouble() / val.mid).toStringAsFixed(2)} ${val.currency}",
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
                       ),
-                  ],
-                ),
-              ),
-            ),
+                    ),
+                  )
+                : Text("No Data"),
           ],
         ),
       ),
