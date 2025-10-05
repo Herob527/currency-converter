@@ -1,13 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_currency/cubits/currency_cubit.dart';
 import 'package:flutter_currency/cubits/future_cubit.dart';
 import 'package:flutter_currency/models/currency_response.dart';
-
 import 'package:flutter_currency/pages/main.dart';
-import 'package:flutter_currency/cubits/currency_cubit.dart';
+import 'package:flutter_currency/repositories/currency_repository.dart';
+import 'package:get_it/get_it.dart';
+
+final getIt = GetIt.instance;
 
 void main() {
+  getIt.registerSingleton(CurrencyRepository());
   runApp(const MyApp());
 }
 
@@ -25,13 +29,20 @@ class MyApp extends StatelessWidget {
       ),
       home: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (BuildContext context) => CurrencyCubit()),
+          BlocProvider(create: (context) => CurrencyCubit()),
           BlocProvider(
-            create: (BuildContext context) =>
-                FutureCubit<CurrencyResponseModel?>(),
+            create: (context) {
+              var futureCubit = FutureCubit<CurrencyResponseModel?>();
+              futureCubit.fetch(() => currencyRepository.getCurrencies());
+              return futureCubit;
+            },
           ),
         ],
-        child: MyHomePage(),
+        child:
+            BlocBuilder<
+              FutureCubit<CurrencyResponseModel?>,
+              FutureState<CurrencyResponseModel?>
+            >(builder: (context, state) => MyHomePage()),
       ),
     );
   }
