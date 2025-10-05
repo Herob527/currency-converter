@@ -17,9 +17,12 @@ class FutureState<DataType> {
 }
 
 class FutureCubit<DataType> extends Cubit<FutureState<DataType>> {
-  FutureCubit() : super(FutureState<DataType>());
+  Future<DataType> Function() queryFn;
+  FutureCubit({required this.queryFn}) : super(FutureState<DataType>()) {
+    _fetch(queryFn);
+  }
 
-  void fetch(Future<DataType> Function() queryFn) async {
+  void _fetch(Future<DataType> Function() queryFn) async {
     emit(state.copyWith(status: FutureStatus.loading, data: null));
     try {
       final value = await queryFn();
