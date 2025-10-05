@@ -12,6 +12,9 @@ final getIt = GetIt.instance;
 
 void main() {
   getIt.registerSingleton(CurrencyRepository());
+  getIt.registerSingleton(
+    FutureCubit(queryFn: getIt<CurrencyRepository>().getCurrencies),
+  );
   runApp(const MyApp());
 }
 
@@ -22,6 +25,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var futureCubit = getIt<FutureCubit<CurrencyResponseModel?>>();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -30,16 +34,12 @@ class MyApp extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => CurrencyCubit()),
-          BlocProvider(
-            create: (context) =>
-                FutureCubit(queryFn: getIt<CurrencyRepository>().getCurrencies),
-          ),
+          BlocProvider(create: (context) => futureCubit),
         ],
-        child:
-            BlocBuilder<
-              FutureCubit<CurrencyResponseModel?>,
-              FutureState<CurrencyResponseModel?>
-            >(builder: (context, state) => MyHomePage()),
+        child: BlocBuilder(
+          bloc: futureCubit,
+          builder: (context, state) => MyHomePage(),
+        ),
       ),
     );
   }
