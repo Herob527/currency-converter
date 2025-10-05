@@ -8,12 +8,11 @@ class FutureState<DataType> {
 
   FutureState({this.data, this.status = FutureStatus.pending});
 
-  FutureState<DataType> copyWith({DataType? data, FutureStatus? status}) {
-    return FutureState<DataType>(
-      data: data ?? this.data,
-      status: status ?? this.status,
-    );
-  }
+  FutureState<DataType> copyWith({DataType? data, FutureStatus? status}) =>
+      FutureState<DataType>(
+        data: data ?? this.data,
+        status: status ?? this.status,
+      );
 }
 
 class FutureCubit<DataType> extends Cubit<FutureState<DataType>> {
