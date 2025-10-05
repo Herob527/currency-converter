@@ -11,18 +11,18 @@ class CurrencyCubit extends Cubit<Currency> {
       return;
     }
     if (state.big > 0 && newVal < 0) {
-      emit(state.withCurrency(newBig: state.big - 1, newSmall: 99));
+      emit(state.copyWith(newBig: state.big - 1, newSmall: 99));
       return;
     }
-    emit(state.withCurrency(newSmall: state.small - 1));
+    emit(state.copyWith(newSmall: state.small - 1));
   }
 
   void increment() {
     int newVal = state.small + 1;
     if (newVal > 99) {
-      emit(state.withCurrency(newBig: state.big + 1, newSmall: 0));
+      emit(state.copyWith(newBig: state.big + 1, newSmall: 0));
       return;
     }
-    emit(state.withCurrency(newSmall: state.small + 1));
+    emit(state.copyWith(newSmall: state.small + 1));
   }
 }
