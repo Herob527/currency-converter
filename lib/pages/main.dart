@@ -7,46 +7,38 @@ import 'package:flutter_currency/models/currency_rate.dart';
 import 'package:flutter_currency/models/currency_response.dart';
 import 'package:flutter_currency/cubits/currency_cubit.dart';
 
-Widget dataView(List<CurrencyRate> rates, Currency currency) {
-  return Expanded(
-    child: SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          border: Border(left: BorderSide(color: Colors.black, width: 2)),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          spacing: 16,
-          children: [
-            for (var val in rates)
-              Row(
-                spacing: 8,
-                children: [
-                  Text(val.code),
-                  Text(
-                    "${(currency.toDouble() / val.mid).toStringAsFixed(2)} ${val.currency}",
-                  ),
-                ],
-              ),
-          ],
-        ),
+Widget dataView(List<CurrencyRate> rates, Currency currency) => Expanded(
+  child: SingleChildScrollView(
+    child: Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        border: Border(left: BorderSide(color: Colors.black, width: 2)),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        spacing: 16,
+        children: [
+          for (var val in rates)
+            Row(
+              spacing: 8,
+              children: [
+                Text(val.code),
+                Text(
+                  "${(currency.toDouble() / val.mid).toStringAsFixed(2)} ${val.currency}",
+                ),
+              ],
+            ),
+        ],
       ),
     ),
-  );
-}
+  ),
+);
 
-Widget noDataView() {
-  return const Text("No Data");
-}
+Widget noDataView() => const Text("No Data");
 
-Widget loadingView() {
-  return const CircularProgressIndicator();
-}
+Widget loadingView() => const CircularProgressIndicator();
 
-Widget errorView() {
-  return const Text("Error");
-}
+Widget errorView() => const Text("Error");
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
