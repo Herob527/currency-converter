@@ -90,12 +90,12 @@ class MyHomePage extends StatelessWidget {
               FutureStatus.loading => loadingView(),
               FutureStatus.failure => errorView(),
               FutureStatus.success =>
-                futureCubit.state.data != null
-                    ? dataView(
+                futureCubit.state.data == null
+                    ? noDataView()
+                    : dataView(
                         futureCubit.state.data!.rates,
                         currencyCubit.state,
-                      )
-                    : noDataView(),
+                      ),
             },
           ],
         ),
