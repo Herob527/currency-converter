@@ -4,7 +4,6 @@ import 'package:flutter_currency/constants.dart';
 import 'package:flutter_currency/cubits/future_cubit.dart';
 import 'package:flutter_currency/models/currency.dart';
 import 'package:flutter_currency/models/currency_response.dart';
-import 'package:flutter_currency/repositories/currency_repository.dart';
 import 'package:flutter_currency/cubits/currency_cubit.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -14,7 +13,6 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final currencyCubit = context.read<CurrencyCubit>();
     final futureCubit = context.read<FutureCubit<CurrencyResponseModel?>>();
-    futureCubit.fetch(() => currencyRepository.getCurrencies());
     return Scaffold(
       body: BlocBuilder<CurrencyCubit, Currency>(
         builder: (context, currency) => Row(
