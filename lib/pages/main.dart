@@ -69,16 +69,12 @@ class MyHomePage extends StatelessWidget {
                       MaterialButton(
                         color: Colors.red,
                         child: const Icon(Icons.exposure_minus_1),
-                        onPressed: () {
-                          currencyCubit.decrement();
-                        },
+                        onPressed: () => currencyCubit.decrement(),
                       ),
                       MaterialButton(
                         color: Colors.blue,
                         child: const Icon(Icons.plus_one),
-                        onPressed: () {
-                          currencyCubit.increment();
-                        },
+                        onPressed: () => currencyCubit.increment(),
                       ),
                     ],
                   ),
