@@ -16,5 +16,3 @@ class CurrencyRepository {
     return decoded;
   }
 }
-
-final currencyRepository = CurrencyRepository();

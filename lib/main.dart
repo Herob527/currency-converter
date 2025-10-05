@@ -33,7 +33,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) {
               var futureCubit = FutureCubit<CurrencyResponseModel?>();
-              futureCubit.fetch(() => currencyRepository.getCurrencies());
+              futureCubit.fetch(
+                () => getIt<CurrencyRepository>().getCurrencies(),
+              );
               return futureCubit;
             },
           ),
